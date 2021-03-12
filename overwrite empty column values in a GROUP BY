@@ -1,0 +1,3 @@
+SELECT Col1, Max(Col2) SUM(Col3)
+FROM Table
+GROUP BY Col1
