@@ -1,0 +1,2 @@
+       string SystemDate = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")+ ".000";
+       string query = @"SELECT NSMApproveDate, AdduserID, EditUserID, AddDate FROM   mkt.MarketDevelopmentExpense WHERE  (AddDate BETWEEN '"+ SystemDate + "' AND GETDATE())";
