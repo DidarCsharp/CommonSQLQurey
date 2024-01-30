@@ -1,0 +1,3 @@
+SELECT        No, STRING_AGG(ProductCode, ', ') AS ProductCode, STRING_AGG(Name, ', ') AS ProductName
+FROM            vinv.OrderWiseProduct
+GROUP BY No
