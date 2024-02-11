@@ -1,0 +1,2 @@
+//-Convert Date '2023-07-01 ' To 'Jul-23' 
+SELECT FORMAT(CAST('2023-07-01' AS DATE), 'MMM-yy') AS FormattedDate;
