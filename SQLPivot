@@ -1,0 +1,24 @@
+DECLARE 
+    @columns NVARCHAR(MAX) = '', 
+	@sql     NVARCHAR(MAX) = '';
+
+SELECT        
+@columns+=QUOTENAME(BookName) + ','
+FROM            [vdis].LibBookDemandAvailableLastMonth group by BookName order by BookName
+
+SET @columns = LEFT(@columns, LEN(@columns) - 1);
+
+SET @sql ='SELECT        *
+FROM  (select [Library Code]
+      ,[Library Name]
+      ,[Zone Code]
+      ,[Zilla Name]
+      ,[BookName]
+      ,isnull(sum([Available]),0) as [Available]
+  FROM [vdis].[LibBookDemandAvailableLastMonth] group by [Library Code]
+      ,[Library Name]
+      ,[Zone Code]
+      ,[Zilla Name]
+      ,[BookName] ) t PIVOT (sum([Available]) FOR [BookName] IN ('+ @columns +')) AS pivot_table order by [Zone Code],[Zilla Name],[Library Name]';
+
+EXEC (@sql)
